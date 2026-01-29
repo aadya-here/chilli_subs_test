@@ -52,7 +52,7 @@ async function run() {
 }
 
 
-run();
+await run();
 
 await upsertPublication({
   name: publicationName,
