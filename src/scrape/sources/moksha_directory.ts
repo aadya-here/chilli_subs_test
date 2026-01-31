@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as cheerio from "cheerio";
 import { upsertMokshaDirectory } from "../upsert/moksha_directory";
-import { prisma } from "../../server/prisma";
+import { prisma} from "../../server/prisma";
 import { normalizeName } from "../normalise/pubName";
 import {normalizeUrl} from "../normalise/puburl";
 

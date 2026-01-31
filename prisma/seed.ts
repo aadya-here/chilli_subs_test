@@ -1,4 +1,4 @@
-import { PrismaClient, Prisma } from "../generated/prisma/client";
+import { PrismaClient, Prisma } from "@/generated/prisma/client";
 import 'dotenv/config'
 
 console.log("DATABASE_URL:", process.env.DATABASE_URL ? "✓ set" : "✗ missing");
