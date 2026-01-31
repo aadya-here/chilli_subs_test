@@ -13,10 +13,7 @@ async function run() {
   const html = response.data;
   const $ = cheerio.load(html);
 
-  // 1️⃣ h1 → publication name
-
-
-  // 2️⃣ ALL links under div.guidelines
+  
 
 
   $("div.guidelines a").each((_, el) => {
