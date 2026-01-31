@@ -5,7 +5,7 @@ const nextConfig = {
     return [
       {
         source: '/src',
-        destination: '/', // Next.js automatically maps the root to index.tsx
+        destination: '/', 
       },
     ]
   },
