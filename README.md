@@ -21,34 +21,41 @@ This project is a full-stack data pipeline and UI designed to collect, normalize
 
 ### Project Structure
 
+
+```text
 ├── prisma/
-│ ├── schema.prisma 
-│ └── seed.ts 
+│   ├── schema.prisma
+│   └── seed.ts
 │
 ├── src/
-│ ├── pages
-│ │ ├── publications/
-│ │ │ ├── index.ts
-│ │ │ └── [id].ts
-│ │ └── api/publications
-│ │ | |── index.tsx
-│ │ │ └── [id].tsx
-│ │ ├── _app.tsx
-│ │ |── index.tsx
-│ ├── scrape/
-│ │ |
-│ │ ├── miniscraper.ts # test file, can ignore
-│ │ ├── normalize/
-│ │ ├── sources/ 
-│ │ ├── upsert/
-│ │
-│ │── server
-│ │── styles 
-│ |── utils
+│   ├── pages/
+│   │   ├── publications/
+│   │   │   ├── index.ts
+│   │   │   └── [id].ts
+│   │   │
+│   │   ├── api/
+│   │   │   └── publications/
+│   │   │       ├── index.tsx
+│   │   │       └── [id].tsx
+│   │   │
+│   │   ├── _app.tsx
+│   │   └── index.tsx
+│   │
+│   ├── scrape/
+│   │   ├── miniscraper.ts   # test file (ignore)
+│   │   ├── normalize/
+│   │   ├── sources/
+│   │   └── upsert/
+│   │
+│   ├── server/
+│   ├── styles/
+│   └── utils/
+│
 ├── .env.example
 ├── package.json
 ├── tsconfig.json
 └── README.md
+
 
 
 
