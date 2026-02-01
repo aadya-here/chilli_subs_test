@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Lit Mag Submission Calls Aggregator
+This project is a full-stack data pipeline and UI designed to collect, normalize, and browse literary magazine submission calls. It automates the collection of data from public sources—such as Moksha-powered pages and literary directories—storing them in a structured database for easy discovery.
 
-## Getting Started
+## 🛠 Tech Stack
+* **Language:** TypeScript (End-to-end for scrapers, API, and UI)
+* **Framework:** Next.js (Pages Router)
+* **Database:** MongoDB
+* **ORM:** Prisma
+* **Tooling:** ESLint + Prettier
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🏗 Architecture
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* **Fetcher Layer:** Implements retries, exponential backoff, and polite rate limiting
+* **Source Parsers:** Dedicated modules for Moksha-powered sites and public directories (currently it has only Mokhsa)
+* **Normalization Engine:** Standardizes casing, canonical URLs, and maps genres to fixed enumms
+* **Idempotent Upsert:** Prisma-based logic that prevents duplicates using `normalizedName` and `hostname` constraints
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Project Structure
 
-## Learn More
+├── prisma/
+│ ├── schema.prisma 
+│ └── seed.ts 
+│
+├── src/
+│ ├── pages
+│ │ ├── publications/
+│ │ │ ├── index.ts
+│ │ │ └── [id].ts
+│ │ └── api/publications
+│ │ | |── index.tsx
+│ │ │ └── [id].tsx
+│ │ ├── _app.tsx
+│ │ |── index.tsx
+│ ├── scrape/
+│ │ |
+│ │ ├── miniscraper.ts # test file, can ignore
+│ │ ├── normalize/
+│ │ ├── sources/ 
+│ │ ├── upsert/
+│ │
+│ │── server
+│ │── styles 
+│ |── utils
+├── .env.example
+├── package.json
+├── tsconfig.json
+└── README.md
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🚀 Getting Started
 
-## Deploy on Vercel
+### 1. Setup
+1. run `pnpm install`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. create a .env file and add your mongodb url DATABASE_URL="mongodb+srv://..."
+3. run `pnpm prisma db generate`  
+4.  run `pnpm add -D ts-node` & then `pnpm tsc src/scrape/sources/moksha.ts` to insert to db
+5. run `pnpm dev` to see the output 
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+🧩 Extensibility
+
+Adding a new source requires:
+* New parser in src/scrape/sources/
+* Mapping to normalized fields
+<!-- Registering the source in the CLI -->
+
+
